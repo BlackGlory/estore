@@ -8,17 +8,17 @@
 #+BEGIN_SRC sh
 docker run --detach --publish 8080:8080 blackglory/estore
 
-curl http://localhost:8080/estore/namespace/items/id \
-  --request PATCH \
+curl http://localhost:8080/estore/namespace/items/id/events \
+  --request POST \
   --header 'Content-Type: application/json' \
   --data '{ "event": "HelloWorld" }'
 
-curl http://localhost:8080/estore/namespace/items/id
+curl http://localhost:8080/estore/namespace/items/id/events
 # [{ "event": "HelloWorld" }]
 
 curl http://localhost:8080/estore/namespace/items/id --request DELETE
 
-curl http://localhost:8080/estore/namespace/items/id
+curl http://localhost:8080/estore/namespace/items/id/events
 # 404 Not Found
 #+END_SRC
 
