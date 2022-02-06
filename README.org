@@ -431,7 +431,7 @@ await fetch('http://localhost:8080/admin/blacklist', {
 ******* 添加黑名单
 =PUT /admin/blacklist/<namespace>=
 
-将特定EStore加入黑名单.
+将特定namespace加入黑名单.
 
 ******** Example
 ********* curl
@@ -455,7 +455,7 @@ await fetch(`http://localhost:8080/admin/blacklist/${namespace}`, {
 ******* 移除黑名单
 =DELETE /admin/blacklist/<namespace>=
 
-将特定EStore从黑名单中移除.
+将特定namespace从黑名单中移除.
 
 ******** Example
 ********* curl
@@ -502,7 +502,7 @@ await fetch('http://localhost:8080/admin/whitelist', {
 ******* 添加白名单
 =PUT /admin/whitelist/<namespace>=
 
-将特定EStore加入白名单.
+将特定namespace加入白名单.
 
 ******** Example
 ********* curl
@@ -526,7 +526,7 @@ await fetch(`http://localhost:8080/admin/whitelist/${namespace}`, {
 ******* 移除白名单
 =DELETE /admin/whitelist/<namespace>=
 
-将特定EStore从白名单中移除.
+将特定namespace从白名单中移除.
 
 ******** Example
 ********* curl
@@ -688,10 +688,10 @@ await fetch(`http://localhost:8080/admin/estore-with-tokens`, {
 }).then(res => res.json())
 #+END_SRC
 
-****** 获取特定EStore的所有token信息
+****** 获取特定namespace的所有token信息
 =GET /admin/estore/<namespace>/tokens=
 
-获取特定EStore的所有token信息, 返回JSON表示的token信息数组
+获取特定namespace的所有token信息, 返回JSON表示的token信息数组
 =Array<{ token: string, write: boolean, read: boolean, delete: boolean }>=.
 
 ******* Example
@@ -711,7 +711,7 @@ await fetch(`http://localhost:8080/admin/estore/${namespace}/tokens`, {
 }).then(res => res.json())
 #+END_SRC
 
-****** 为特定EStore的token设置write权限
+****** 为特定namespace的token设置write权限
 =PUT /admin/estore/<namespace>/tokens/<token>/write=
 
 添加/更新token, 为token设置write权限.
@@ -735,7 +735,7 @@ await fetch(`http://localhost:8080/admin/estore/${namespace}/tokens/${token}/log
 })
 #+END_SRC
 
-****** 取消特定EStore的token的write权限
+****** 取消特定namespace的token的write权限
 =DELETE /admin/estore/<namespace>/tokens/<token>/write=
 
 取消token的read权限.
@@ -759,7 +759,7 @@ await fetch(`http://localhost:8080/admin/estore/${namespace}/tokens/${token}/wri
 })
 #+END_SRC
 
-****** 为特定EStore的token设置read权限
+****** 为特定namespace的token设置read权限
 =PUT /admin/estore/<namespace>/tokens/<token>/read=
 
 添加/更新token, 为token设置read权限.
@@ -783,7 +783,7 @@ await fetch(`http://localhost:8080/admin/estore/${namespace}/tokens/${token}/rea
 })
 #+END_SRC
 
-****** 取消特定EStore的token的read权限
+****** 取消特定namespace的token的read权限
 =DELETE /admin/estore/<namespace>/tokens/<token>/read=
 
 取消token的read权限.
@@ -799,7 +799,16 @@ curl \
 
 ******** fetch
 #+BEGIN_SRC js
-await fetch(`http://localhost:8080/admin/estore/${namespace>/tokens/<token>/delete=
+await fetch(`http://localhost:8080/admin/estore/${namespace>/tokens/${token}/delete`, {
+  method: 'DELETE'
+, headers: {
+    'Authorization': `Bearer ${adminPassword}`
+  }
+})
+#+END_SRC
+
+****** 为特定namespace的token设置delete权限
+=PUT /admin/estore/<namespace>/tokens/<token>/delete=
 
 添加/更新token, 为token设置delete权限.
 
@@ -822,7 +831,7 @@ await fetch(`http://localhost:8080/admin/estore/${namespace}/tokens/${token}/del
 })
 #+END_SRC
 
-****** 取消特定EStore的token的delete权限
+****** 取消特定namespace的token的delete权限
 =DELETE /admin/estore/<namespace>/tokens/<token>/delete=
 
 取消token的delete权限.
