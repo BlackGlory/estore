@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "estore",
-  "version": "0.3.6",
+  "version": "0.1.0",
   "main": "lib/index.js",
   "repository": "git@github.com:BlackGlory/estore.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
