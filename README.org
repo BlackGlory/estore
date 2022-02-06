@@ -110,31 +110,15 @@ volumes:
 curl \
   --request POST \
   --data "$EVENT" \
-  "http://localhost:8080/estore/$namespace/items/$id"
+  "http://localhost:8080/estore/$namespace/items/$id/events"
 #+END_SRC
 
 ****** JavaScript
 #+BEGIN_SRC js
-await fetch(`http://localhost:8080/estore/${namespace}/items/${id}`, {
+await fetch(`http://localhost:8080/estore/${namespace}/items/${id}/events`, {
   method: 'POST'
 , body: event
 })
-#+END_SRC
-
-**** get events
-=GET /estore/<namespace>/items/<id>/events=
-
-按JSON数组结构返回项目内的所有事件, 返回200或404.
-
-***** Example
-****** curl
-#+BEGIN_SRC sh
-curl "http://localhost:8080/estore/$namespace/items/$id"
-#+END_SRC
-
-****** JavaScript
-#+BEGIN_SRC js
-await fetch(`http://localhost:8080/estore/${namespace}/items/${id}`)
 #+END_SRC
 
 **** get event
@@ -151,6 +135,22 @@ curl "http://localhost:8080/estore/$namespace/items/$id/events/$index"
 ****** JavaScript
 #+BEGIN_SRC js
 await fetch(`http://localhost:8080/estore/${namespace}/items/${id}/events/$index`)
+#+END_SRC
+
+**** get events
+=GET /estore/<namespace>/items/<id>/events=
+
+按JSON数组结构返回项目内的所有事件, 返回200或404.
+
+***** Example
+****** curl
+#+BEGIN_SRC sh
+curl "http://localhost:8080/estore/$namespace/items/$id"
+#+END_SRC
+
+****** JavaScript
+#+BEGIN_SRC js
+await fetch(`http://localhost:8080/estore/${namespace}/items/${id}`)
 #+END_SRC
 
 **** size
@@ -188,44 +188,6 @@ curl \
 await fetch(`http://localhost:8080/estore/${namespace}/items/${id}`, {
   method: 'HEAD'
 })
-#+END_SRC
-
-**** get all item ids
-=GET /estore/<namespace>/items=
-
-获取所有项目的id, 返回 =string[]=.
-
-此操作支持返回[[https://github.com/ndjson/ndjson-spec][ndjson]]格式的响应, 需要 =Accept: application/x-ndjson= 请求头.
-
-***** Example
-****** curl
-#+BEGIN_SRC sh
-curl "http://localhost:8080/estore/$namespace/items"
-#+END_SRC
-
-****** JavaScript
-#+BEGIN_SRC js
-await fetch(`http://localhost:8080/estore/${namespace}/items`).then(res => res.json())
-#+END_SRC
-
-**** get all namespaces
-=GET /estore=
-
-列出所有的namespaces.
-
-输出JSON =Array<string>=.
-
-此操作支持返回[[https://github.com/ndjson/ndjson-spec][ndjson]]格式的响应, 需要 =Accept: application/x-ndjson= 请求头.
-
-***** Example
-****** curl
-#+BEGIN_SRC sh
-curl 'http://localhost:8080/estore'
-#+END_SRC
-
-****** JavaScript
-#+BEGIN_SRC js
-await fetch('http://localhost:8080/estore').then(res => res.json())
 #+END_SRC
 
 **** delete
@@ -266,6 +228,44 @@ curl \
 await fetch(`http://localhost:8080/estore/${db}`, {
   method: 'DELETE'
 })
+#+END_SRC
+
+**** get all item ids
+=GET /estore/<namespace>/items=
+
+获取所有项目的id, 返回 =string[]=.
+
+此操作支持返回[[https://github.com/ndjson/ndjson-spec][ndjson]]格式的响应, 需要 =Accept: application/x-ndjson= 请求头.
+
+***** Example
+****** curl
+#+BEGIN_SRC sh
+curl "http://localhost:8080/estore/$namespace/items"
+#+END_SRC
+
+****** JavaScript
+#+BEGIN_SRC js
+await fetch(`http://localhost:8080/estore/${namespace}/items`).then(res => res.json())
+#+END_SRC
+
+**** get all namespaces
+=GET /estore=
+
+列出所有的namespaces.
+
+输出JSON =Array<string>=.
+
+此操作支持返回[[https://github.com/ndjson/ndjson-spec][ndjson]]格式的响应, 需要 =Accept: application/x-ndjson= 请求头.
+
+***** Example
+****** curl
+#+BEGIN_SRC sh
+curl 'http://localhost:8080/estore'
+#+END_SRC
+
+****** JavaScript
+#+BEGIN_SRC js
+await fetch('http://localhost:8080/estore').then(res => res.json())
 #+END_SRC
 
 **** stats
