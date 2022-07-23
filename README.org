@@ -31,6 +31,7 @@ git clone https://github.com/BlackGlory/estore
 cd estore
 yarn install
 yarn build
+yarn bundle
 yarn --silent start
 #+END_SRC
 
