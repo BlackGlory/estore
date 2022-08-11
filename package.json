@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "estore",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "repository": "git@github.com:BlackGlory/estore.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
