@@ -1,8 +1,9 @@
 import { getDatabase } from '../database'
+import { withLazyStatic, lazyStatic } from 'extra-lazy'
 
-export function clearItems(namespace: string): void {
-  getDatabase().prepare(`
+export const clearItems = withLazyStatic(function (namespace: string): void {
+  lazyStatic(() => getDatabase().prepare(`
     DELETE FROM estore_event
      WHERE namespace = $namespace;
-  `).run({ namespace })
-}
+  `), [getDatabase()]).run({ namespace })
+})

@@ -1,22 +1,26 @@
 import { hasItem } from './has-item'
 import { NotFound } from './error'
 import { getDatabase } from '../database'
+import { withLazyStatic, lazyStatic } from 'extra-lazy'
 
 /**
  * @throws {NotFound}
  */
-export function deleteItem(namespace: string, id: string): void {
-  getDatabase().transaction(() => {
+export const deleteItem = withLazyStatic(function (
+  namespace: string
+, id: string
+): void {
+  lazyStatic(() => getDatabase().transaction((namespace: string, id: string) => {
     if (!hasItem(namespace, id)) throw new NotFound(namespace, id)
 
     del(namespace, id)
-  })()
-}
+  }), [getDatabase()])(namespace, id)
+})
 
-function del(namespace: string, itemId: string): void {
-  getDatabase().prepare(`
+const del = withLazyStatic(function (namespace: string, itemId: string): void {
+  lazyStatic(() => getDatabase().prepare(`
     DELETE FROM estore_event
      WHERE namespace = $namespace
        AND item_id = $itemId;
-  `).run({ namespace, itemId })
-}
+  `), [getDatabase()]).run({ namespace, itemId })
+})
