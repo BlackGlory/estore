@@ -49,5 +49,6 @@ const getNextIndex = withLazyStatic(function (
      ORDER BY "index" DESC 
   `), [getDatabase()]).get({ namespace, itemId })
   if (!row) return 0
+
   return row['index'] + 1
 })

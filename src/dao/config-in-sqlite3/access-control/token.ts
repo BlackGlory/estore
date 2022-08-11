@@ -79,9 +79,10 @@ export const setWriteToken = withLazyStatic(function (
 export const unsetWriteToken = withLazyStatic(function (
   params: { token: string; namespace: string }
 ): void {
-  lazyStatic(() => getDatabase().transaction((
-    { token, namespace }: { token: string; namespace: string }
-  ) => {
+  lazyStatic(() => getDatabase().transaction(({ token, namespace }: {
+    token: string
+    namespace: string
+  }) => {
     lazyStatic(() => getDatabase().prepare(`
       UPDATE estore_token
          SET write_permission = 0
@@ -137,9 +138,10 @@ export const setReadToken = withLazyStatic(function (
 export const unsetReadToken = withLazyStatic(function (
   params: { token: string; namespace: string }
 ): void {
-  lazyStatic(() => getDatabase().transaction((
-    { token, namespace }: { token: string; namespace: string }
-  ) => {
+  lazyStatic(() => getDatabase().transaction(({ token, namespace }: {
+    token: string
+    namespace: string
+  }) => {
     lazyStatic(() => getDatabase().prepare(`
       UPDATE estore_token
          SET read_permission = 0
@@ -182,9 +184,10 @@ export const setDeleteToken = withLazyStatic(function (
 export const unsetDeleteToken = withLazyStatic(function (
   params: { token: string; namespace: string }
 ): void {
-  lazyStatic(() => getDatabase().transaction((
-    { token, namespace }: { token: string; namespace: string }
-  ) => {
+  lazyStatic(() => getDatabase().transaction(({ token, namespace }: {
+    token: string
+    namespace: string
+  }) => {
     lazyStatic(() => getDatabase().prepare(`
       UPDATE estore_token
          SET delete_permission = 0
@@ -196,9 +199,10 @@ export const unsetDeleteToken = withLazyStatic(function (
   }), [getDatabase()])(params)
 })
 
-const deleteNoPermissionToken = withLazyStatic(function (
-  { token, namespace }: { token: string, namespace: string }
-): void {
+const deleteNoPermissionToken = withLazyStatic(function ({ token, namespace }: {
+  token: string
+  namespace: string
+}): void {
   lazyStatic(() => getDatabase().prepare(`
     DELETE FROM estore_token
      WHERE token = $token
