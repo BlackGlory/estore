@@ -43,7 +43,6 @@
     "@types/app-root-path": "^1.2.4",
     "@types/better-sqlite3": "^7.6.2",
     "@types/jest": "^27.4.1",
-    "@types/jest-json-schema": "^6.1.1",
     "@types/node": "16",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",

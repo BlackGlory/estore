@@ -1055,15 +1055,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest-json-schema@^6.1.1":
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/@types/jest-json-schema/-/jest-json-schema-6.1.1.tgz#1471204581549da636d2bc956c1d352ae17ecb2c"
-  integrity sha512-tb+4AHBx+EwV3xSlZHMLE10MvitNGFpnQIZSTzZOPg15rXBdqig63BBE+pNAIN1226lP2L7zaVUcbvAsqMFluA==
-  dependencies:
-    "@types/jest" "*"
-    ajv "^6.10.2"
-
-"@types/jest@*", "@types/jest@^27.4.1":
+"@types/jest@^27.4.1":
   version "27.4.1"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-27.4.1.tgz#185cbe2926eaaf9662d340cc02e548ce9e11ab6d"
   integrity sha512-23iPJADSmicDVrWk+HT58LMJtzLAnB2AgIzplQuq/bSrGaxCrlvRFjGbXmamnnk/mAmCdLStiGqggu28ocUyiw==
@@ -1457,7 +1449,7 @@ ajv-keywords@^3.5.2:
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.5.2.tgz#31f29da5ab6e00d1c2d329acf7b5929614d5014d"
   integrity sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==
 
-ajv@^6.10.0, ajv@^6.10.2, ajv@^6.11.0, ajv@^6.12.2, ajv@^6.12.4, ajv@^6.12.5, ajv@^6.12.6:
+ajv@^6.10.0, ajv@^6.11.0, ajv@^6.12.2, ajv@^6.12.4, ajv@^6.12.5, ajv@^6.12.6:
   version "6.12.6"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
   integrity sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
