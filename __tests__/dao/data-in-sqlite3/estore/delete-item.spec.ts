@@ -3,8 +3,6 @@ import { NotFound } from '@dao/data-in-sqlite3/estore/error'
 import { getError } from 'return-style'
 import { initializeDatabases, clearDatabases } from '@test/utils'
 import { hasRawEvent, setRawEvent } from './utils'
-import '@blackglory/jest-matchers'
-import 'jest-extended'
 
 jest.mock('@dao/config-in-sqlite3/database')
 jest.mock('@dao/data-in-sqlite3/database')
@@ -27,7 +25,7 @@ describe('deleteItem(namespace: string, id: string): void', () => {
       const result = DAO.deleteItem(namespace, itemId)
 
       expect(result).toBeUndefined()
-      expect(hasRawEvent(namespace, itemId, 0)).toBeFalse()
+      expect(hasRawEvent(namespace, itemId, 0)).toBe(false)
     })
   })
 
@@ -39,7 +37,7 @@ describe('deleteItem(namespace: string, id: string): void', () => {
       const err = getError(() => DAO.deleteItem(namespace, id))
 
       expect(err).toBeInstanceOf(NotFound)
-      expect(hasRawEvent(namespace, id, 0)).toBeFalse()
+      expect(hasRawEvent(namespace, id, 0)).toBe(false)
     })
   })
 })

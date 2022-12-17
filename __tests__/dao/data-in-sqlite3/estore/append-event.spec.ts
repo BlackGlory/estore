@@ -3,8 +3,6 @@ import { IllegalIndex } from '@dao/data-in-sqlite3/estore/error'
 import { initializeDatabases, clearDatabases } from '@test/utils'
 import { getRawEvent, setRawEvent } from './utils'
 import { getError } from 'return-style'
-import '@blackglory/jest-matchers'
-import 'jest-extended'
 
 jest.mock('@dao/config-in-sqlite3/database')
 jest.mock('@dao/data-in-sqlite3/database')

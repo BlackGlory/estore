@@ -2,7 +2,6 @@ import * as DAO from '@dao/data-in-sqlite3/estore/get-all-namespaces'
 import { toArray } from 'iterable-operator'
 import { setRawEvent } from './utils'
 import { initializeDatabases, clearDatabases } from '@test/utils'
-import '@blackglory/jest-matchers'
 
 jest.mock('@dao/config-in-sqlite3/database')
 jest.mock('@dao/data-in-sqlite3/database')
@@ -16,7 +15,6 @@ describe('getAllNamespaces(): Iterable<string>', () => {
       const iter = DAO.getAllNamespaces()
       const result = toArray(iter)
 
-      expect(iter).toBeIterable()
       expect(result).toStrictEqual([])
     })
   })
@@ -35,7 +33,6 @@ describe('getAllNamespaces(): Iterable<string>', () => {
       const iter = DAO.getAllNamespaces()
       const result = toArray(iter)
 
-      expect(iter).toBeIterable()
       expect(result).toStrictEqual([namespace])
     })
   })

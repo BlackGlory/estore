@@ -1,8 +1,6 @@
 import * as DAO from '@dao/data-in-sqlite3/estore/has-item'
 import { initializeDatabases, clearDatabases } from '@test/utils'
 import { setRawEvent } from './utils'
-import '@blackglory/jest-matchers'
-import 'jest-extended'
 
 jest.mock('@dao/config-in-sqlite3/database')
 jest.mock('@dao/data-in-sqlite3/database')
@@ -24,7 +22,7 @@ describe('hasItem(namespace: string, itemId: string): boolean', () => {
 
       const result = DAO.hasItem(namespace, itemId)
 
-      expect(result).toBeTrue()
+      expect(result).toBe(true)
     })
   })
 
@@ -35,7 +33,7 @@ describe('hasItem(namespace: string, itemId: string): boolean', () => {
 
       const result = DAO.hasItem(namespace, itemId)
 
-      expect(result).toBeFalse()
+      expect(result).toBe(false)
     })
   })
 })

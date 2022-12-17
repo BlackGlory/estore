@@ -1,8 +1,6 @@
 import * as DAO from '@dao/data-in-sqlite3/estore/clear-items'
 import { initializeDatabases, clearDatabases } from '@test/utils'
 import { hasRawEvent, setRawEvent } from './utils'
-import '@blackglory/jest-matchers'
-import 'jest-extended'
 
 jest.mock('@dao/config-in-sqlite3/database')
 jest.mock('@dao/data-in-sqlite3/database')
@@ -26,7 +24,7 @@ describe('clearItems(namespace: string): void', () => {
       const result = DAO.clearItems(namesapce1)
 
       expect(result).toBeUndefined()
-      expect(hasRawEvent(namesapce2, itemId, 0)).toBeTrue()
+      expect(hasRawEvent(namesapce2, itemId, 0)).toBe(true)
     })
   })
 
@@ -51,8 +49,8 @@ describe('clearItems(namespace: string): void', () => {
       const result = DAO.clearItems(namesapce1)
 
       expect(result).toBeUndefined()
-      expect(hasRawEvent(namesapce1, itemId, 0)).toBeFalse()
-      expect(hasRawEvent(namesapce2, itemId, 0)).toBeTrue()
+      expect(hasRawEvent(namesapce1, itemId, 0)).toBe(false)
+      expect(hasRawEvent(namesapce2, itemId, 0)).toBe(true)
     })
   })
 })
