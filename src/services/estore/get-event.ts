@@ -1,6 +1,6 @@
 import { FastifyPluginAsync } from 'fastify'
-import { idSchema, namespaceSchema, tokenSchema } from '@src/schema'
-import { isntUndefined } from '@blackglory/types'
+import { idSchema, namespaceSchema, tokenSchema } from '@src/schema.js'
+import { isntUndefined } from 'extra-utils'
 
 export const routes: FastifyPluginAsync<{ Core: ICore }> = async function routes(server, { Core }) {
   server.get<{
@@ -41,9 +41,11 @@ export const routes: FastifyPluginAsync<{ Core: ICore }> = async function routes
 
       const result = await Core.EStore.getEvent(namespace, id, index)
       if (isntUndefined(result)) {
-        reply.send(result)
+        return reply.send(result)
       } else {
-        reply.status(404).send()
+        return reply
+          .status(404)
+          .send()
       }
     }
   )

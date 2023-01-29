@@ -1,6 +1,6 @@
 import { FastifyPluginAsync } from 'fastify'
-import { idSchema, namespaceSchema, tokenSchema } from '@src/schema'
-import { APPEND_PAYLOAD_LIMIT } from '@env'
+import { idSchema, namespaceSchema, tokenSchema } from '@src/schema.js'
+import { APPEND_PAYLOAD_LIMIT } from '@env/index.js'
 import { CustomError } from '@blackglory/errors'
 
 export const routes: FastifyPluginAsync<{ Core: ICore }> = async function routes(server, { Core }) {
@@ -24,7 +24,7 @@ export const routes: FastifyPluginAsync<{ Core: ICore }> = async function routes
         }
       , querystring: { token: tokenSchema }
       , headers: {
-          'if-match': { type: 'integer', minimum: 0, nulable: true }
+          'if-match': { type: 'integer', minimum: 0, nullable: true }
         }
       , response: {
           204: { type: 'null' }
@@ -63,7 +63,9 @@ export const routes: FastifyPluginAsync<{ Core: ICore }> = async function routes
         , payload
         , index
         )
-        reply.status(204).send()
+        return reply
+          .status(204)
+          .send()
       } catch (e) {
         if (e instanceof Core.EStore.IllegalIndex) return reply.status(412).send()
         throw e

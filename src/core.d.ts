@@ -1,4 +1,4 @@
-type Json = import('justypes').Json
+type JSONValue = import('justypes').JSONValue
 type CustomErrorConstructor = import('@blackglory/errors').CustomErrorConstructor
 
 interface IStats {
@@ -12,8 +12,12 @@ interface ICore {
   EStore: {
     has(namespace: string, id: string): Promise<boolean>
     size(namespace: string, id: string): Promise<number>
-    getEvent(namespace: string, id: string, index: number): Promise<Json | undefined>
-    getAllEvents(namespace: string, id: string): Promise<Json[] | undefined>
+    getEvent(
+      namespace: string
+    , id: string
+    , index: number
+    ): Promise<JSONValue | undefined>
+    getAllEvents(namespace: string, id: string): Promise<JSONValue[] | undefined>
     getAllItemIds(namespace: string): AsyncIterable<string>
     getAllNamespaces(): AsyncIterable<string>
     clear(namespace: string): Promise<void>
@@ -22,7 +26,12 @@ interface ICore {
     /**
      * @throws {IllegalIndex}
      */
-    append(namespace: string, id: string, payload: Json, index?: number): Promise<void>
+    append(
+      namespace: string
+    , id: string
+    , payload: JSONValu
+    , index?: number
+    ): Promise<void>
 
     /**
      * @throws {NotFound}
@@ -65,13 +74,13 @@ interface ICore {
     isEnabled(): boolean
     getAllNamespaces(): Promise<string[]>
     get(namespace: string): Promise<string | null>
-    set(namespace: string, schema: Json): Promise<void>
+    set(namespace: string, schema: JSONValue): Promise<void>
     remove(namespace: string): Promise<void>
 
     /**
      * @throws {InvalidPayload}
      */
-    validate(namespace: string, payload: Json): Promise<void>
+    validate(namespace: string, payload: JSONValue): Promise<void>
     InvalidPayload: CustomErrorConstructor
   }
 

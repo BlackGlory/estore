@@ -1,5 +1,5 @@
 import { FastifyPluginAsync } from 'fastify'
-import { namespaceSchema, idSchema, tokenSchema } from '@src/schema'
+import { namespaceSchema, idSchema, tokenSchema } from '@src/schema.js'
 
 export const routes: FastifyPluginAsync<{ Core: ICore }> = async function routes(server, { Core }) {
   server.get<{
@@ -36,7 +36,7 @@ export const routes: FastifyPluginAsync<{ Core: ICore }> = async function routes
       }
 
       const result = await Core.EStore.size(namespace, id)
-      reply.send(result)
+      return reply.send(result)
     }
   )
 }

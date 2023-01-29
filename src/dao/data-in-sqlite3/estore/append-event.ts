@@ -1,6 +1,6 @@
-import { IllegalIndex } from './error'
-import { getDatabase } from '../database'
-import { isntUndefined } from '@blackglory/types'
+import { IllegalIndex } from './error.js'
+import { getDatabase } from '../database.js'
+import { isntUndefined } from 'extra-utils'
 import { withLazyStatic, lazyStatic } from 'extra-lazy'
 
 export const appendEvent = withLazyStatic(function (

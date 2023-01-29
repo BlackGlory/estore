@@ -1,6 +1,6 @@
-import { EStoreDAO } from '@dao'
-import { Json } from 'justypes'
-import { isNull } from '@blackglory/types'
+import { EStoreDAO } from '@dao/index.js'
+import { JSONValue } from '@blackglory/prelude'
+import { isNull } from 'extra-utils'
 
 export function has(namespace: string, id: string): Promise<boolean> {
   return EStoreDAO.hasItem(namespace, id)
@@ -10,7 +10,11 @@ export function size(namespace: string, id: string): Promise<number> {
   return EStoreDAO.getItemSize(namespace, id)
 }
 
-export async function getEvent(namespace: string, id: string, index: number): Promise<Json | undefined> {
+export async function getEvent(
+  namespace: string
+, id: string
+, index: number
+): Promise<JSONValue | undefined> {
   const result = await EStoreDAO.getEvent(namespace, id, index)
   if (isNull(result)) {
     return undefined
@@ -19,7 +23,10 @@ export async function getEvent(namespace: string, id: string, index: number): Pr
   }
 }
 
-export async function getAllEvents(namespace: string, id: string): Promise<Json[] | undefined> {
+export async function getAllEvents(
+  namespace: string
+, id: string
+): Promise<JSONValue[] | undefined> {
   const result = await EStoreDAO.getAllEvents(namespace, id)
   if (isNull(result)) {
     return undefined
@@ -39,7 +46,7 @@ export async function clear(namespace: string): Promise<void> {
 /**
  * @throws {IllegalIndex}
  */
-export async function append(namespace: string, id: string, payload: Json, index?: number): Promise<void> {
+export async function append(namespace: string, id: string, payload: JSONValue, index?: number): Promise<void> {
   try {
     return await EStoreDAO.appendEvent(namespace, id, JSON.stringify(payload), index)
   } catch (e) {

@@ -1,6 +1,6 @@
-import { hasItem } from './has-item'
-import { NotFound } from './error'
-import { getDatabase } from '../database'
+import { hasItem } from './has-item.js'
+import { NotFound } from './error.js'
+import { getDatabase } from '../database.js'
 import { withLazyStatic, lazyStatic } from 'extra-lazy'
 
 /**

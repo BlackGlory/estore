@@ -1,11 +1,8 @@
-import * as DAO from '@dao/data-in-sqlite3/estore/append-event'
-import { IllegalIndex } from '@dao/data-in-sqlite3/estore/error'
-import { initializeDatabases, clearDatabases } from '@test/utils'
-import { getRawEvent, setRawEvent } from './utils'
+import * as DAO from '@dao/data-in-sqlite3/estore/append-event.js'
+import { IllegalIndex } from '@dao/data-in-sqlite3/estore/error.js'
+import { initializeDatabases, clearDatabases } from '@test/utils.js'
+import { getRawEvent, setRawEvent } from './utils.js'
 import { getError } from 'return-style'
-
-jest.mock('@dao/config-in-sqlite3/database')
-jest.mock('@dao/data-in-sqlite3/database')
 
 beforeEach(initializeDatabases)
 afterEach(clearDatabases)
