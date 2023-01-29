@@ -22,7 +22,7 @@
     "bundle": "webpack --stats-error-details",
     "start": "node dist/index.cjs",
     "smoke": "cross-env NODE_ENV=test node dist/index.cjs",
-    "docker:build": "docker build --tag static .",
+    "docker:build": "docker build --tag estore .",
     "docker:test": "run-s docker:test:clean docker:test:build docker:test:run",
     "docker:coverage": "run-s docker:test:clean docker:test:build docker:test:coverage docker:test:clean",
     "docker:test:build": "docker-compose --file docker-compose.test.yml build",
