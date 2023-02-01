@@ -1,9 +1,5 @@
 import { CustomError } from '@blackglory/errors'
-
-export interface IStats {
-  namespace: string
-  items: number
-}
+import { IStats } from '@api/contract.js'
 
 export interface IEStoreDAO {
   hasItem(namespace: string, id: string): boolean
