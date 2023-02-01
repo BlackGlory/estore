@@ -2,11 +2,11 @@ import * as Config from '@dao/config/database.js'
 import * as Data from '@dao/data/database.js'
 import { resetCache } from '@env/cache.js'
 import { buildServer } from '@src/server.js'
+import { UnpackedPromise } from 'hotypes'
 import Ajv from 'ajv'
 
-// @ts-ignore
-const ajv = new Ajv()
-let server: ReturnType<typeof buildServer>
+const ajv = new Ajv.default()
+let server: UnpackedPromise<ReturnType<typeof buildServer>>
 let address: string
 
 export function getAddress() {
@@ -15,7 +15,7 @@ export function getAddress() {
 
 export async function startService() {
   await initializeDatabases()
-  server = buildServer()
+  server = await buildServer()
   address = await server.listen()
 }
 
@@ -38,7 +38,7 @@ export function clearDatabases() {
   Data.closeDatabase()
 }
 
-export async function resetEnvironment() {
+export function resetEnvironment() {
   // assigning a property on `process.env` will implicitly convert the value to a string.
   // use `delete` to delete a property from `process.env`.
   // see also: https://nodejs.org/api/process.html#process_process_env

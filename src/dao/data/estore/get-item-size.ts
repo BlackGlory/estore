@@ -11,7 +11,8 @@ export const getItemSize = withLazyStatic(function (
      WHERE namespace = $namespace
        AND item_id = $itemId
      ORDER BY "index" DESC
-  `), [getDatabase()]).get({ namespace, itemId })
+  `), [getDatabase()])
+    .get({ namespace, itemId }) as { index: number } | undefined
   if (!row) return 0
 
   return row['index'] + 1

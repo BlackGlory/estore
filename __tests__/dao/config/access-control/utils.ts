@@ -41,7 +41,7 @@ export function getRawBlacklist(namespace: string): IRawBlacklist | null {
     SELECT *
       FROM estore_blacklist
      WHERE namespace = $namespace;
-  `).get({ namespace })
+  `).get({ namespace }) as IRawBlacklist | null
 }
 
 export function setRawWhitelist(item: IRawWhitelist): IRawWhitelist {
@@ -62,7 +62,7 @@ export function getRawWhitelist(namespace: string): IRawWhitelist | null {
     SELECT *
       FROM estore_whitelist
      WHERE namespace = $namespace;
-  `).get({ namespace })
+  `).get({ namespace }) as IRawWhitelist | null
 }
 
 export function setRawTokenPolicy<T extends IRawTokenPolicy>(item: T): T {
@@ -88,12 +88,12 @@ export function hasRawTokenPolicy(namespace: string): boolean {
   return !!getRawTokenPolicy(namespace)
 }
 
-export function getRawTokenPolicy(namespace: string): IRawTokenPolicy | null {
+export function getRawTokenPolicy(namespace: string): IRawTokenPolicy | undefined {
   return getDatabase().prepare(`
     SELECT *
       FROM estore_token_policy
      WHERE namespace = $namespace;
-  `).get({ namespace })
+  `).get({ namespace }) as IRawTokenPolicy | undefined
 }
 
 export function setRawToken(item: IRawToken): IRawToken {
@@ -121,11 +121,14 @@ export function hasRawToken(token: string, namespace: string): boolean {
   return !!getRawToken(token, namespace)
 }
 
-export function getRawToken(token: string, namespace: string): IRawToken | null {
+export function getRawToken(
+  token: string
+, namespace: string
+): IRawToken | undefined {
   return getDatabase().prepare(`
     SELECT *
       FROM estore_token
      WHERE token = $token
        AND namespace = $namespace;
-  `).get({ token, namespace })
+  `).get({ token, namespace }) as IRawToken | undefined
 }

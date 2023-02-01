@@ -27,7 +27,7 @@ describe('no access control', () => {
     it('412', async () => {
       const namespace = 'namespace'
       const id = 'id'
-      await EStoreDAO.appendEvent(namespace, id, JSON.stringify('event'), 0)
+      EStoreDAO.appendEvent(namespace, id, JSON.stringify('event'), 0)
 
       const res = await fetch(post(
         url(getAddress())
@@ -44,7 +44,7 @@ describe('no access control', () => {
     it('204', async () => {
       const namespace = 'namespace'
       const id = 'id'
-      await EStoreDAO.appendEvent(namespace, id, JSON.stringify('event'), 0)
+      EStoreDAO.appendEvent(namespace, id, JSON.stringify('event'), 0)
 
       const res = await fetch(post(
         url(getAddress())

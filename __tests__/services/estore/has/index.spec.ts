@@ -11,7 +11,7 @@ describe('no access control', () => {
   it('204', async () => {
     const namespace = 'namespace'
     const id = 'id'
-    await EStoreDAO.appendEvent(namespace, id, 'payload')
+    EStoreDAO.appendEvent(namespace, id, 'payload')
 
     const res = await fetch(head(
       url(getAddress())

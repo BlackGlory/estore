@@ -31,7 +31,7 @@ describe('whitelist', () => {
         process.env.ESTORE_LIST_BASED_ACCESS_CONTROL = 'whitelist'
         const namespace = 'namespace'
         const id = 'id'
-        await EStoreDAO.appendEvent(namespace, id, JSON.stringify('payload'))
+        EStoreDAO.appendEvent(namespace, id, JSON.stringify('payload'))
 
         const res = await fetch(get(
           url(getAddress())
@@ -48,7 +48,7 @@ describe('whitelist', () => {
       it('200', async () => {
         const namespace = 'namespace'
         const id = 'id'
-        await EStoreDAO.appendEvent(namespace, id, JSON.stringify('payload'))
+        EStoreDAO.appendEvent(namespace, id, JSON.stringify('payload'))
 
         const res = await fetch(get(
           url(getAddress())

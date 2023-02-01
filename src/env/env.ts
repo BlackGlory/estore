@@ -1,6 +1,6 @@
 import { ValueGetter } from 'value-getter'
 import { isNumber } from 'extra-utils'
-import { Getter } from '@blackglory/prelude'
+import { Getter, isPlainObject, JSONValue } from '@blackglory/prelude'
 import { assert } from '@blackglory/errors'
 import { getCache } from '@env/cache.js'
 import { getAppRoot } from '@src/utils.js'
@@ -111,7 +111,7 @@ export const JSON_VALIDATION: Getter<boolean> =
 
 export const DEFAULT_JSON_SCHEMA: Getter<object | undefined> =
   env('ESTORE_DEFAULT_JSON_SCHEMA')
-    .convert(toJsonObject)
+    .convert(toJSONObject)
     .memoize(getCache)
     .get()
 
@@ -136,8 +136,13 @@ function toInteger(val: string | number | undefined ): number | undefined {
   if (val) return Number.parseInt(val, 10)
 }
 
-function toJsonObject(val: string | undefined): object | undefined {
-  if (val) return JSON.parse(val)
+function toJSONObject(val: string | undefined): object | undefined {
+  if (val) {
+    const result = JSON.parse(val) as JSONValue
+    assert(isPlainObject(result), 'val is not a JSON object')
+
+    return result
+  }
 }
 
 function shouldBePositive(val: number) {

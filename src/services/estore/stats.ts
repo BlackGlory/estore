@@ -23,7 +23,7 @@ export const routes: FastifyPluginAsync<{ api: IAPI }> = async (server, { api })
   , async (req, reply) => {
       const namespace = req.params.namespace
 
-      const result = await api.EStore.stats(namespace)
+      const result = api.EStore.stats(namespace)
       return reply.send(result)
     }
   )

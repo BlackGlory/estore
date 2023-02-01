@@ -7,7 +7,7 @@ afterEach(clearDatabases)
 
 describe('blacklist', () => {
   describe('getAllBlacklistItems(): string[]', () => {
-    it('return string[]', async () => {
+    it('return string[]', () => {
       const namespace = 'namespace'
       setRawBlacklist({ namespace })
 
@@ -19,7 +19,7 @@ describe('blacklist', () => {
 
   describe('inBlacklist(namespace: string): boolean', () => {
     describe('exist', () => {
-      it('return true', async () => {
+      it('return true', () => {
         const namespace = 'namespace'
         setRawBlacklist({ namespace })
 

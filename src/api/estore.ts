@@ -20,16 +20,19 @@ export function getEvent(
   if (isNull(result)) {
     return undefined
   } else {
-    return JSON.parse(result)
+    return JSON.parse(result) as JSONValue
   }
 }
 
-export function getAllEvents(namespace: string, id: string): JSONValue[] | undefined {
+export function getAllEvents(
+  namespace: string
+, id: string
+): JSONValue[] | undefined {
   const result = EStoreDAO.getAllEvents(namespace, id)
   if (isNull(result)) {
     return undefined
   } else {
-    return result.map(x => JSON.parse(x))
+    return result.map(x => JSON.parse(x) as JSONValue)
   }
 }
 

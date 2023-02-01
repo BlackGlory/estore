@@ -10,7 +10,8 @@ afterEach(stopService)
 describe('blacklist', () => {
   describe('enabled', () => {
     describe('namespace in blacklist', () => {
-      it('403', async () => {        process.env.ESTORE_LIST_BASED_ACCESS_CONTROL = 'blacklist'
+      it('403', async () => {
+        process.env.ESTORE_LIST_BASED_ACCESS_CONTROL = 'blacklist'
         const namespace = 'namespace'
         const id = 'id'
         EStoreDAO.appendEvent(namespace, id, 'payload')
@@ -30,7 +31,7 @@ describe('blacklist', () => {
         process.env.ESTORE_LIST_BASED_ACCESS_CONTROL = 'blacklist'
         const namespace = 'namespace'
         const id = 'id'
-        await EStoreDAO.appendEvent(namespace, id, 'payload')
+        EStoreDAO.appendEvent(namespace, id, 'payload')
 
         const res = await fetch(get(
           url(getAddress())

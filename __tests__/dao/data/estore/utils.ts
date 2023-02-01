@@ -26,16 +26,24 @@ export function setRawEvent(event: IRawItem): IRawItem {
   return event
 }
 
-export function hasRawEvent(namespace: string, itemId: string, index: number): boolean {
+export function hasRawEvent(
+  namespace: string
+, itemId: string
+
+, index: number): boolean {
   return !!getRawEvent(namespace, itemId, index)
 }
 
-export function getRawEvent(namespace: string, itemId: string, index: number): IRawItem | undefined {
+export function getRawEvent(
+  namespace: string
+, itemId: string
+, index: number
+): IRawItem | undefined {
   return getDatabase().prepare(`
     SELECT *
       FROM estore_event
      WHERE namespace = $namespace
        AND item_id = $itemId
        AND "index" = $index;
-  `).get({ namespace, itemId, index })
+  `).get({ namespace, itemId, index }) as IRawItem | undefined
 }

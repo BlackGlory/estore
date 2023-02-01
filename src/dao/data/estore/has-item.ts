@@ -9,7 +9,8 @@ export const hasItem = withLazyStatic((namespace: string, itemId: string): boole
               WHERE namespace = $namespace
                 AND item_id = $itemId
            ) AS matched;
-  `), [getDatabase()]).get({ namespace, itemId })
+  `), [getDatabase()])
+    .get({ namespace, itemId }) as { matched: 1 | 0 }
 
   return row['matched'] === 1
 })

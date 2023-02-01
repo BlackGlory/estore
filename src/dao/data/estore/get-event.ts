@@ -12,7 +12,8 @@ export const getEvent = withLazyStatic(function (
      WHERE namespace = $namespace
        AND item_id = $itemId
        AND "index" = $index
-  `), [getDatabase()]).get({ namespace, itemId, index })
+  `), [getDatabase()])
+    .get({ namespace, itemId, index }) as { payload: string } | undefined
   if (!row) return null
 
   return row['payload']

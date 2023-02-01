@@ -1,31 +1,33 @@
 import { getDatabase } from '../database.js'
 import { withLazyStatic, lazyStatic } from 'extra-lazy'
 
-export const getAllNamespacesWithTokenPolicies = withLazyStatic(function (): string[] {
+export const getAllNamespacesWithTokenPolicies = withLazyStatic((): string[] => {
   const result = lazyStatic(() => getDatabase().prepare(`
     SELECT namespace
       FROM estore_token_policy;
-  `), [getDatabase()]).all()
+  `), [getDatabase()])
+    .all() as Array<{ namespace: string }>
 
   return result.map(x => x['namespace'])
 })
 
-export const getTokenPolicies = withLazyStatic(function (namespace: string): {
+export const getTokenPolicies = withLazyStatic((namespace: string): {
   writeTokenRequired: boolean | null
   readTokenRequired: boolean | null
   deleteTokenRequired: boolean | null
-} {
-  const row: {
-    'write_token_required': number | null
-  , 'read_token_required': number | null
-  , 'delete_token_required': number | null
-  } = lazyStatic(() => getDatabase().prepare(`
+} => {
+  const row = lazyStatic(() => getDatabase().prepare(`
     SELECT write_token_required
          , read_token_required
          , delete_token_required
       FROM estore_token_policy
      WHERE namespace = $namespace;
-  `), [getDatabase()]).get({ namespace })
+  `), [getDatabase()])
+    .get({ namespace }) as {
+      write_token_required: number | null
+      read_token_required: number | null
+      delete_token_required: number | null
+    } | undefined
 
   if (row) {
     const writeTokenRequired = row['write_token_required']
@@ -63,7 +65,10 @@ export const setWriteTokenRequired = withLazyStatic(function (
     VALUES ($namespace, $writeTokenRequired)
         ON CONFLICT(namespace)
         DO UPDATE SET write_token_required = $writeTokenRequired;
-  `), [getDatabase()]).run({ namespace, writeTokenRequired: booleanToNumber(val) })
+  `), [getDatabase()]).run({
+    namespace
+  , writeTokenRequired: booleanToNumber(val)
+  })
 })
 
 export const unsetWriteTokenRequired = withLazyStatic(function (
@@ -89,7 +94,10 @@ export const setReadTokenRequired = withLazyStatic(function (
     VALUES ($namespace, $readTokenRequired)
         ON CONFLICT(namespace)
         DO UPDATE SET read_token_required = $readTokenRequired;
-  `), [getDatabase()]).run({ namespace, readTokenRequired: booleanToNumber(val) })
+  `), [getDatabase()]).run({
+    namespace
+  , readTokenRequired: booleanToNumber(val)
+  })
 })
 
 export const unsetReadTokenRequired = withLazyStatic(function (
@@ -115,7 +123,10 @@ export const setDeleteTokenRequired = withLazyStatic(function (
     VALUES ($namespace, $deleteTokenRequired)
         ON CONFLICT(namespace)
         DO UPDATE SET delete_token_required = $deleteTokenRequired;
-  `), [getDatabase()]).run({ namespace, deleteTokenRequired: booleanToNumber(val) })
+  `), [getDatabase()]).run({
+    namespace
+  , deleteTokenRequired: booleanToNumber(val)
+  })
 })
 
 export const unsetDeleteTokenRequired = withLazyStatic(function (

@@ -11,7 +11,8 @@ export const getAllEvents = withLazyStatic(function (
      WHERE namespace = $namespace
        AND item_id = $itemId
      ORDER BY "index" ASC
-  `), [getDatabase()]).all({ namespace, itemId })
+  `), [getDatabase()])
+    .all({ namespace, itemId }) as Array<{ payload: string }>
   if (!rows.length) return null
 
   return rows.map(row => row['payload'])

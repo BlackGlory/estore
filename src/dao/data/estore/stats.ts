@@ -3,11 +3,12 @@ import { withLazyStatic, lazyStatic } from 'extra-lazy'
 import { IStats } from './contract.js'
 
 export const stats = withLazyStatic((namespace: string): IStats => {
-  const row: { items: number } = lazyStatic(() => getDatabase().prepare(`
+  const row = lazyStatic(() => getDatabase().prepare(`
     SELECT COUNT(DISTINCT item_id) AS items
       FROM estore_event
      WHERE namespace = $namespace
-  `), [getDatabase()]).get({ namespace })
+  `), [getDatabase()])
+    .get({ namespace }) as { items: number }
 
   return {
     namespace: namespace

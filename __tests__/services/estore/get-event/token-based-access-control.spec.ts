@@ -76,7 +76,7 @@ describe('token-based access control', () => {
           process.env.ESTORE_READ_TOKEN_REQUIRED = 'true'
           const namespace = 'namespace'
           const id = 'id'
-          await EStoreDAO.appendEvent(namespace, id, JSON.stringify('payload'))
+          EStoreDAO.appendEvent(namespace, id, JSON.stringify('payload'))
 
           const res = await fetch(get(
             url(getAddress())
@@ -92,7 +92,7 @@ describe('token-based access control', () => {
           process.env.ESTORE_TOKEN_BASED_ACCESS_CONTROL = 'true'
           const namespace = 'namespace'
           const id = 'id'
-          await EStoreDAO.appendEvent(namespace, id, JSON.stringify('payload'))
+          EStoreDAO.appendEvent(namespace, id, JSON.stringify('payload'))
 
           const res = await fetch(get(
             url(getAddress())

@@ -1,7 +1,7 @@
 import { EStoreDAO } from '@dao/index.js'
 
-export async function prepareItems(namespace: string, itemNamespaces: string[]) {
+export function prepareItems(namespace: string, itemNamespaces: string[]): void {
   for (const id of itemNamespaces) {
-    await EStoreDAO.appendEvent(namespace, id, 'payload')
+    EStoreDAO.appendEvent(namespace, id, 'payload')
   }
 }
