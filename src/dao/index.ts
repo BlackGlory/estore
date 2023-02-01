@@ -1,3 +1,3 @@
-export { AccessControlDAO } from './config-in-sqlite3/access-control/index.js'
-export { JsonSchemaDAO } from './config-in-sqlite3/json-schema/index.js'
-export { EStoreDAO } from './data-in-sqlite3/estore/index.js'
+export { AccessControlDAO } from './config/access-control/index.js'
+export { JSONSchemaDAO } from './config/json-schema/index.js'
+export { EStoreDAO } from './data/estore/index.js'

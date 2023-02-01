@@ -1,5 +1,5 @@
-import * as ConfigInSqlite3 from '@dao/config-in-sqlite3/database.js'
-import * as DataInSqlite3 from '@dao/data-in-sqlite3/database.js'
+import * as Config from '@dao/config/database.js'
+import * as Data from '@dao/data/database.js'
 import { resetCache } from '@env/cache.js'
 import { buildServer } from '@src/server.js'
 import Ajv from 'ajv'
@@ -26,16 +26,16 @@ export async function stopService() {
 }
 
 export async function initializeDatabases() {
-  ConfigInSqlite3.openDatabase()
-  await ConfigInSqlite3.prepareDatabase()
+  Config.openDatabase()
+  await Config.prepareDatabase()
 
-  DataInSqlite3.openDatabase()
-  await DataInSqlite3.prepareDatabase()
+  Data.openDatabase()
+  await Data.prepareDatabase()
 }
 
-export async function clearDatabases() {
-  ConfigInSqlite3.closeDatabase()
-  DataInSqlite3.closeDatabase()
+export function clearDatabases() {
+  Config.closeDatabase()
+  Data.closeDatabase()
 }
 
 export async function resetEnvironment() {

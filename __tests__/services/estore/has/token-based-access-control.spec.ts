@@ -16,9 +16,9 @@ describe('token-based access control', () => {
           const namespace = 'namespace'
           const id = 'id'
           const token = 'token'
-          await EStoreDAO.appendEvent(namespace, id, 'payload')
-          await AccessControlDAO.setReadTokenRequired(namespace, true)
-          await AccessControlDAO.setReadToken({ namespace, token })
+          EStoreDAO.appendEvent(namespace, id, 'payload')
+          AccessControlDAO.TokenPolicy.setReadTokenRequired(namespace, true)
+          AccessControlDAO.Token.setReadToken({ namespace, token })
 
           const res = await fetch(head(
             url(getAddress())
@@ -36,9 +36,9 @@ describe('token-based access control', () => {
           const namespace = 'namespace'
           const id = 'id'
           const token = 'token'
-          await EStoreDAO.appendEvent(namespace, id, 'payload')
-          await AccessControlDAO.setReadTokenRequired(namespace, true)
-          await AccessControlDAO.setReadToken({ namespace, token })
+          EStoreDAO.appendEvent(namespace, id, 'payload')
+          AccessControlDAO.TokenPolicy.setReadTokenRequired(namespace, true)
+          AccessControlDAO.Token.setReadToken({ namespace, token })
 
           const res = await fetch(head(
             url(getAddress())
@@ -55,9 +55,9 @@ describe('token-based access control', () => {
           const namespace = 'namespace'
           const id = 'id'
           const token = 'token'
-          await EStoreDAO.appendEvent(namespace, id, 'payload')
-          await AccessControlDAO.setReadTokenRequired(namespace, true)
-          await AccessControlDAO.setReadToken({ namespace, token })
+          EStoreDAO.appendEvent(namespace, id, 'payload')
+          AccessControlDAO.TokenPolicy.setReadTokenRequired(namespace, true)
+          AccessControlDAO.Token.setReadToken({ namespace, token })
 
           const res = await fetch(head(
             url(getAddress())
@@ -76,7 +76,7 @@ describe('token-based access control', () => {
           process.env.ESTORE_READ_TOKEN_REQUIRED = 'true'
           const namespace = 'namespace'
           const id = 'id'
-          await EStoreDAO.appendEvent(namespace, id, 'payload')
+          EStoreDAO.appendEvent(namespace, id, 'payload')
 
           const res = await fetch(head(
             url(getAddress())
@@ -92,7 +92,7 @@ describe('token-based access control', () => {
           process.env.ESTORE_TOKEN_BASED_ACCESS_CONTROL = 'true'
           const namespace = 'namespace'
           const id = 'id'
-          await EStoreDAO.appendEvent(namespace, id, 'payload')
+          EStoreDAO.appendEvent(namespace, id, 'payload')
 
           const res = await fetch(head(
             url(getAddress())
@@ -112,9 +112,9 @@ describe('token-based access control', () => {
           const namespace = 'namespace'
           const id = 'id'
           const token = 'token'
-          await EStoreDAO.appendEvent(namespace, id, 'payload')
-          await AccessControlDAO.setReadTokenRequired(namespace, true)
-          await AccessControlDAO.setReadToken({ namespace, token })
+          EStoreDAO.appendEvent(namespace, id, 'payload')
+          AccessControlDAO.TokenPolicy.setReadTokenRequired(namespace, true)
+          AccessControlDAO.Token.setReadToken({ namespace, token })
 
           const res = await fetch(head(
             url(getAddress())
@@ -133,9 +133,9 @@ describe('token-based access control', () => {
           const namespace = 'namespace'
           const id = 'id'
           const token = 'token'
-          await EStoreDAO.appendEvent(namespace, id, 'payload')
-          await AccessControlDAO.setReadTokenRequired(namespace, true)
-          await AccessControlDAO.setReadToken({ namespace, token })
+          EStoreDAO.appendEvent(namespace, id, 'payload')
+          AccessControlDAO.TokenPolicy.setReadTokenRequired(namespace, true)
+          AccessControlDAO.Token.setReadToken({ namespace, token })
 
           const res = await fetch(head(
             url(getAddress())

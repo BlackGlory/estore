@@ -13,8 +13,8 @@ describe('blacklist', () => {
       it('403', async () => {        process.env.ESTORE_LIST_BASED_ACCESS_CONTROL = 'blacklist'
         const namespace = 'namespace'
         const id = 'id'
-        await EStoreDAO.appendEvent(namespace, id, 'payload')
-        await AccessControlDAO.addBlacklistItem(namespace)
+        EStoreDAO.appendEvent(namespace, id, 'payload')
+        AccessControlDAO.Blacklist.addBlacklistItem(namespace)
 
         const res = await fetch(get(
           url(getAddress())
@@ -47,8 +47,8 @@ describe('blacklist', () => {
       it('200', async () => {
         const namespace = 'namespace'
         const id = 'id'
-        await EStoreDAO.appendEvent(namespace, id, 'payload')
-        await AccessControlDAO.addBlacklistItem(namespace)
+        EStoreDAO.appendEvent(namespace, id, 'payload')
+        AccessControlDAO.Blacklist.addBlacklistItem(namespace)
 
         const res = await fetch(get(
           url(getAddress())

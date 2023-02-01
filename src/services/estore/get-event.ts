@@ -1,8 +1,9 @@
 import { FastifyPluginAsync } from 'fastify'
 import { idSchema, namespaceSchema, tokenSchema } from '@src/schema.js'
 import { isntUndefined } from 'extra-utils'
+import { IAPI } from '@api/contract.js'
 
-export const routes: FastifyPluginAsync<{ Core: ICore }> = async function routes(server, { Core }) {
+export const routes: FastifyPluginAsync<{ api: IAPI }> = async (server, { api }) => {
   server.get<{
     Params: {
       namespace: string
@@ -29,17 +30,17 @@ export const routes: FastifyPluginAsync<{ Core: ICore }> = async function routes
       const token = req.query.token
 
       try {
-        await Core.Blacklist.check(namespace)
-        await Core.Whitelist.check(namespace)
-        await Core.TBAC.checkReadPermission(namespace, token)
+        await api.Blacklist.check(namespace)
+        await api.Whitelist.check(namespace)
+        await api.TBAC.checkReadPermission(namespace, token)
       } catch (e) {
-        if (e instanceof Core.Blacklist.Forbidden) return reply.status(403).send()
-        if (e instanceof Core.Whitelist.Forbidden) return reply.status(403).send()
-        if (e instanceof Core.TBAC.Unauthorized) return reply.status(401).send()
+        if (e instanceof api.Blacklist.Forbidden) return reply.status(403).send()
+        if (e instanceof api.Whitelist.Forbidden) return reply.status(403).send()
+        if (e instanceof api.TBAC.Unauthorized) return reply.status(401).send()
         throw e
       }
 
-      const result = await Core.EStore.getEvent(namespace, id, index)
+      const result = await api.EStore.getEvent(namespace, id, index)
       if (isntUndefined(result)) {
         return reply.send(result)
       } else {

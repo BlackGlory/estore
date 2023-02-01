@@ -2,8 +2,9 @@ import { FastifyPluginAsync } from 'fastify'
 import { idSchema, namespaceSchema, tokenSchema } from '@src/schema.js'
 import { APPEND_PAYLOAD_LIMIT } from '@env/index.js'
 import { CustomError } from '@blackglory/errors'
+import { IAPI } from '@api/contract.js'
 
-export const routes: FastifyPluginAsync<{ Core: ICore }> = async function routes(server, { Core }) {
+export const routes: FastifyPluginAsync<{ api: IAPI }> = async (server, { api }) => {
   server.post<{
     Params: {
       namespace: string
@@ -41,33 +42,30 @@ export const routes: FastifyPluginAsync<{ Core: ICore }> = async function routes
       const index = req.headers['if-match'] as number | undefined
 
       try {
-        await Core.Blacklist.check(namespace)
-        await Core.Whitelist.check(namespace)
-        await Core.TBAC.checkWritePermission(namespace, token)
-        if (Core.JsonSchema.isEnabled()) {
-          await Core.JsonSchema.validate(namespace, payload)
+        api.Blacklist.check(namespace)
+        api.Whitelist.check(namespace)
+        api.TBAC.checkWritePermission(namespace, token)
+        if (api.JSONSchema.isEnabled()) {
+          api.JSONSchema.validate(namespace, payload)
         }
       } catch (e) {
-        if (e instanceof Core.Blacklist.Forbidden) return reply.status(403).send()
-        if (e instanceof Core.Whitelist.Forbidden) return reply.status(403).send()
-        if (e instanceof Core.TBAC.Unauthorized) return reply.status(401).send()
-        if (e instanceof Core.JsonSchema.InvalidPayload) return reply.status(400).send()
+        if (e instanceof api.Blacklist.Forbidden) return reply.status(403).send()
+        if (e instanceof api.Whitelist.Forbidden) return reply.status(403).send()
+        if (e instanceof api.TBAC.Unauthorized) return reply.status(401).send()
+        if (e instanceof api.JSONSchema.InvalidPayload) {
+          return reply.status(400).send()
+        }
         if (e instanceof BadContentType) return reply.status(415).send()
         throw e
       }
 
       try {
-        await Core.EStore.append(
-          namespace
-        , id
-        , payload
-        , index
-        )
+        api.EStore.append(namespace, id, payload, index)
         return reply
           .status(204)
           .send()
       } catch (e) {
-        if (e instanceof Core.EStore.IllegalIndex) return reply.status(412).send()
+        if (e instanceof api.EStore.IllegalIndex) return reply.status(412).send()
         throw e
       }
     }
