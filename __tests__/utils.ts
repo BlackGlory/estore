@@ -1,5 +1,4 @@
-import * as Config from '@dao/config/database.js'
-import * as Data from '@dao/data/database.js'
+import * as Data from '@dao/database.js'
 import { resetCache } from '@env/cache.js'
 import { buildServer } from '@src/server.js'
 import { UnpackedPromise } from 'hotypes'
@@ -26,15 +25,11 @@ export async function stopService() {
 }
 
 export async function initializeDatabases() {
-  Config.openDatabase()
-  await Config.prepareDatabase()
-
   Data.openDatabase()
   await Data.prepareDatabase()
 }
 
 export function clearDatabases() {
-  Config.closeDatabase()
   Data.closeDatabase()
 }
 
@@ -43,13 +38,6 @@ export function resetEnvironment() {
   // use `delete` to delete a property from `process.env`.
   // see also: https://nodejs.org/api/process.html#process_process_env
   delete process.env.ESTORE_ADMIN_PASSWORD
-  delete process.env.ESTORE_LIST_BASED_ACCESS_CONTROL
-  delete process.env.ESTORE_TOKEN_BASED_ACCESS_CONTROL
-  delete process.env.ESTORE_WRITE_TOKEN_REQUIRED
-  delete process.env.ESTORE_READ_TOKEN_REQUIRED
-  delete process.env.ESTORE_DELETE_TOKEN_REQUIRED
-  delete process.env.ESTORE_JSON_VALIDATION
-  delete process.env.ESTORE_DEFAULT_JSON_SCHEMA
 
   // reset memoize
   resetCache()
