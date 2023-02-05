@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/BlackGlory/estore/compare/v0.2.1...v0.3.0) (2023-02-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* The APIs have been redesigned
+* - Removed JSON schema validation
+- Removed access control
+
+### Bug Fixes
+
+* contract ([d4b44c5](https://github.com/BlackGlory/estore/commit/d4b44c53b6846eb674f3abb924f06914fb872991))
+
+
+* redesign APIs ([76c31b1](https://github.com/BlackGlory/estore/commit/76c31b164c717eb99f4500bdf5b837483f7056ed))
+* remove JSON schema validation, access control ([0ab44f1](https://github.com/BlackGlory/estore/commit/0ab44f181228f730f341a992e9eb7400beeaeb6c))
+
 ### [0.2.1](https://github.com/BlackGlory/estore/compare/v0.2.0...v0.2.1) (2023-02-01)
 
 ## [0.2.0](https://github.com/BlackGlory/estore/compare/v0.1.6...v0.2.0) (2023-01-29)
