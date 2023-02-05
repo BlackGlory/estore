@@ -1,9 +1,8 @@
 import { ValueGetter } from 'value-getter'
 import { isNumber } from 'extra-utils'
-import { Getter } from '@blackglory/prelude'
-import { assert } from '@blackglory/errors'
+import { assert, Getter } from '@blackglory/prelude'
 import { getCache } from '@env/cache.js'
-import { getAppRoot } from '@src/utils.js'
+import { getAppRoot } from '@utils/get-app-root.js'
 import * as path from 'path'
 
 export enum NodeEnv {
@@ -43,23 +42,11 @@ export const PORT: Getter<number> =
     .memoize(getCache)
     .get()
 
-export const PAYLOAD_LIMIT: Getter<number> =
-  env('ESTORE_PAYLOAD_LIMIT')
+export const WS_HEARTBEAT_INTERVAL: Getter<number> =
+  env('ESTORE_WS_HEARTBEAT_INTERVAL')
     .convert(toInteger)
-    .default(1048576)
-    .assert(shouldBePositive)
-    .memoize(getCache)
-    .get()
-
-export const ADMIN_PASSWORD: Getter<string | undefined> =
-  env('ESTORE_ADMIN_PASSWORD')
-    .memoize(getCache)
-    .get()
-
-export const APPEND_PAYLOAD_LIMIT: Getter<number> =
-  env('ESTORE_APPEND_PAYLOAD_LIMIT')
-    .convert(toInteger)
-    .default(PAYLOAD_LIMIT())
+    .default(0)
+    .assert(shouldBePositiveOrZero)
     .memoize(getCache)
     .get()
 
@@ -72,6 +59,6 @@ function toInteger(val: string | number | undefined ): number | undefined {
   if (val) return Number.parseInt(val, 10)
 }
 
-function shouldBePositive(val: number) {
-  assert(val > 0, 'Value must be positive')
+function shouldBePositiveOrZero(val: number) {
+  assert(val === 0 || val > 0, 'should be positive or zero')
 }
