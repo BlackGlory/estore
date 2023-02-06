@@ -1,6 +1,5 @@
 # EStore
-一个Web友好的自托管ad-hoc微服务.
-提供以WebSocket为通讯协议的Event Store.
+提供以WebSocket为通讯协议的Event Store服务.
 
 ## Quickstart
 ```sh
