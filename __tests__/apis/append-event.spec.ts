@@ -1,4 +1,4 @@
-import { EventIndexConflict } from '@src/errors.js'
+import { EventIndexConflict } from '@src/contract.js'
 import { startService, stopService, buildClient } from '@test/utils.js'
 import { getRawEvent, setRawEvent } from './utils.js'
 import { getErrorAsync } from 'return-style'

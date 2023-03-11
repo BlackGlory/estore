@@ -1,9 +1,12 @@
-import { EventIndexConflict } from '@src/errors.js'
+import { EventIndexConflict } from '@src/contract.js'
 import { getDatabase } from '../database.js'
 import { isntUndefined } from 'extra-utils'
 import { withLazyStatic, lazyStatic } from 'extra-lazy'
 import { getNextEventIndex } from './get-next-event-index.js'
 
+/**
+ * @throws {EventIndexConflict}
+ */
 export const appendEvent = withLazyStatic((
   namespace: string
 , itemId: string
