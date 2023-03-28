@@ -14,7 +14,7 @@ describe('clearItemsByNamespace', () => {
       namespace: namesapce2
     , itemId
     , index: 0
-    , event: 'event'
+    , event: JSON.stringify('event')
     })
 
     await client.clearItemsByNamespace(namesapce1)
@@ -37,7 +37,7 @@ describe('clearItemsByNamespace', () => {
       namespace: namesapce2
     , itemId
     , index: 0
-    , event: 'event'
+    , event: JSON.stringify('event')
     })
 
     await client.clearItemsByNamespace(namesapce1)

@@ -1,16 +1,16 @@
 import { CustomError } from '@blackglory/errors'
+import { JSONValue } from '@blackglory/prelude'
 
-export interface IStats {
-  namespace: string
+export interface INamespaceStats {
   items: number
 }
 
 export interface IAPI {
-  stats(namespace: string): IStats
-
   getAllNamespaces(): string[]
   getAllItemIds(namespace: string): string[]
-  getAllEvents(namespace: string, itemId: string): string[]
+  getAllEvents(namespace: string, itemId: string): JSONValue[]
+
+  getNamespaceStats(namespace: string): INamespaceStats
 
   clearItemsByNamespace(namespace: string): null
 
@@ -29,7 +29,7 @@ export interface IAPI {
   appendEvent(
     namespace: string
   , itemId: string
-  , event: string
+  , event: JSONValue
   , nextEventIndex?: number
   ): null
 
@@ -37,7 +37,7 @@ export interface IAPI {
     namespace: string
   , itemId: string
   , eventIndex: number
-  ): string | null
+  ): JSONValue | null
 }
 
 export class EventIndexConflict extends CustomError {}

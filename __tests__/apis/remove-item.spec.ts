@@ -13,7 +13,7 @@ describe('removeItem', () => {
       namespace
     , itemId
     , index: 0
-    , event: 'event'
+    , event: JSON.stringify('event')
     })
 
     await client.removeItem(namespace, itemId)

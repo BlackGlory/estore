@@ -1,21 +1,17 @@
-import { stats } from '@dao/stats.js'
 import { setRawEvent } from './utils.js'
 import { startService, stopService, buildClient } from '@test/utils.js'
 
 beforeEach(startService)
 afterEach(stopService)
 
-describe('stats', () => {
+describe('getNamespaceStats', () => {
   test('empty', async () => {
     const client = await buildClient()
     const namespace = 'namespace'
 
-    const result = await client.stats(namespace)
+    const result = await client.getNamespaceStats(namespace)
 
-    expect(result).toEqual({
-      namespace
-    , items: 0
-    })
+    expect(result).toEqual({ items: 0 })
   })
 
   test('not empty', async () => {
@@ -26,26 +22,23 @@ describe('stats', () => {
       namespace: namespace1
     , itemId: 'item-1'
     , index: 0
-    , event: 'event-1'
+    , event: JSON.stringify('event-1')
     })
     setRawEvent({
       namespace: namespace1
     , itemId: 'item-2'
     , index: 0
-    , event: 'event-2'
+    , event: JSON.stringify('event-2')
     })
     setRawEvent({
       namespace: namespace2
     , itemId: 'item-1'
     , index: 0
-    , event: 'event-1'
+    , event: JSON.stringify('event-1')
     })
 
-    const result = await client.stats(namespace1)
+    const result = await client.getNamespaceStats(namespace1)
 
-    expect(result).toEqual({
-      namespace: namespace1
-    , items: 2
-    })
+    expect(result).toEqual({ items: 2 })
   })
 })

@@ -1,8 +1,10 @@
 import { getDatabase } from '../database.js'
 import { withLazyStatic, lazyStatic } from 'extra-lazy'
-import { IStats } from '@src/contract.js'
+import { INamespaceStats } from '@src/contract.js'
 
-export const stats = withLazyStatic((namespace: string): IStats => {
+export const getNamespaceStats = withLazyStatic((
+  namespace: string
+): INamespaceStats => {
   const row = lazyStatic(() => getDatabase().prepare(`
     SELECT COUNT(DISTINCT item_id) AS items
       FROM estore_event
@@ -11,7 +13,6 @@ export const stats = withLazyStatic((namespace: string): IStats => {
     .get({ namespace }) as { items: number }
 
   return {
-    namespace: namespace
-  , items: row['items']
+    items: row['items']
   }
 })

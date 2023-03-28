@@ -12,7 +12,7 @@ describe('getItemSize', () => {
       namespace
     , itemId: 'id-2'
     , index: 0
-    , event: 'event'
+    , event: JSON.stringify('event')
     })
 
     const result = await client.getItemSize(namespace, 'id-1')
@@ -27,13 +27,13 @@ describe('getItemSize', () => {
       namespace
     , itemId: 'id-1'
     , index: 0
-    , event: 'event'
+    , event: JSON.stringify('event')
     })
     setRawEvent({
       namespace
     , itemId: 'id-2'
     , index: 0
-    , event: 'event'
+    , event: JSON.stringify('event')
     })
 
     const result = await client.getItemSize(namespace, 'id-1')

@@ -20,7 +20,7 @@ describe('appendEvent', () => {
         namespace
       , item_id: itemId
       , index: 0
-      , event
+      , event: JSON.stringify(event)
       })
     })
 
@@ -33,7 +33,7 @@ describe('appendEvent', () => {
         namespace
       , itemId
       , index: 0
-      , event: 'event-1'
+      , event: JSON.stringify('event-1')
       })
 
       await client.appendEvent(namespace, itemId, event)
@@ -42,7 +42,7 @@ describe('appendEvent', () => {
         namespace
       , item_id: itemId
       , index: 1
-      , event
+      , event: JSON.stringify(event)
       })
     })
   })
@@ -59,7 +59,7 @@ describe('appendEvent', () => {
       namespace
     , item_id: itemId
     , index: 0
-    , event
+    , event: JSON.stringify(event)
     })
   })
 

@@ -3,6 +3,7 @@ import { getDatabase } from '../database.js'
 import { isntUndefined } from 'extra-utils'
 import { withLazyStatic, lazyStatic } from 'extra-lazy'
 import { getNextEventIndex } from './get-next-event-index.js'
+import { JSONValue } from '@blackglory/prelude'
 
 /**
  * @throws {EventIndexConflict}
@@ -10,13 +11,13 @@ import { getNextEventIndex } from './get-next-event-index.js'
 export const appendEvent = withLazyStatic((
   namespace: string
 , itemId: string
-, event: string
+, event: JSONValue
 , expectedNextEventIndex?: number
 ): void => {
   lazyStatic(() => getDatabase().transaction((
     namespace: string
   , itemId: string
-  , event: string
+  , event: JSONValue
   , expectedNextEventIndex?: number
   ) => {
     const actualNextEventIndex = getNextEventIndex(namespace, itemId)
@@ -33,7 +34,7 @@ export const appendEvent = withLazyStatic((
       namespace
     , itemId
     , index: actualNextEventIndex
-    , event
+    , event: JSON.stringify(event)
     })
   }), [getDatabase()])(
     namespace

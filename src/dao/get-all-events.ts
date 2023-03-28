@@ -1,10 +1,11 @@
 import { getDatabase } from '../database.js'
 import { withLazyStatic, lazyStatic } from 'extra-lazy'
+import { JSONValue } from '@blackglory/prelude'
 
 export const getAllEvents = withLazyStatic((
   namespace: string
 , itemId: string
-): string[] => {
+): JSONValue[] => {
   const rows = lazyStatic(() => getDatabase().prepare(`
     SELECT event
       FROM estore_event
@@ -14,5 +15,5 @@ export const getAllEvents = withLazyStatic((
   `), [getDatabase()])
     .all({ namespace, itemId }) as Array<{ event: string }>
 
-  return rows.map(row => row['event'])
+  return rows.map(row => JSON.parse(row['event']) as JSONValue)
 })

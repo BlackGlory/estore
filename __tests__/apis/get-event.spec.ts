@@ -15,7 +15,7 @@ describe('getEvent', () => {
       namespace
     , itemId
     , index
-    , event
+    , event: JSON.stringify(event)
     })
 
     const result = await client.getEvent(namespace, itemId, index)

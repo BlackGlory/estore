@@ -21,7 +21,7 @@ describe('getAllNamespaces', () => {
       namespace
     , itemId
     , index: 0
-    , event: 'event'
+    , event: JSON.stringify('event')
     })
 
     const result = await client.getAllNamespaces()

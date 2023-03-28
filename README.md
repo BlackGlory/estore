@@ -48,25 +48,19 @@ volumes:
 
 ## API
 ```ts
-class EventIndexConflict extends CustomError {}
-
-interface IStats {
-  namespace: string
+interface INamespaceStats {
   items: number
 }
 
 interface IAPI {
-  stats(namespace: string): IStats
-
   getAllNamespaces(): string[]
   getAllItemIds(namespace: string): string[]
-  getAllEvents(namespace: string, itemId: string): string[]
+  getAllEvents(namespace: string, itemId: string): JSONValue[]
+
+  getNamespaceStats(namespace: string): INamespaceStats
 
   clearItemsByNamespace(namespace: string): null
 
-  /**
-   * @throws {NotFound}
-   */
   removeItem(namespace: string, itemId: string): null
 
   /**
@@ -77,12 +71,12 @@ interface IAPI {
 
   /**
    * @param nextEventIndex 如果指定, 则会在eventIndex不等于下一个index时抛出EventIndexConflict错误.
-   * @throws {IllegalIndex}
+   * @throws {EventIndexConflict}
    */
   appendEvent(
     namespace: string
   , itemId: string
-  , event: string
+  , event: JSONValue
   , nextEventIndex?: number
   ): null
 
@@ -90,8 +84,10 @@ interface IAPI {
     namespace: string
   , itemId: string
   , eventIndex: number
-  ): string | null
+  ): JSONValue | null
 }
+
+class EventIndexConflict extends CustomError {}
 ```
 
 ## 环境变量

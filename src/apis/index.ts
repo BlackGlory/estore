@@ -8,13 +8,13 @@ import { getAllItemIds } from './get-all-item-ids.js'
 import { getAllNamespaces } from './get-all-namespaces.js'
 import { getEvent } from './get-event.js'
 import { getItemSize } from './get-item-size.js'
-import { stats } from './stats.js'
+import { getNamespaceStats } from './get-namespace-stats.js'
 
 export const API: ImplementationOf<IAPI> = {
-  stats
-, getAllNamespaces
+  getAllNamespaces
 , getAllItemIds
 , getAllEvents
+, getNamespaceStats
 , clearItemsByNamespace
 , removeItem
 , getItemSize

@@ -23,13 +23,13 @@ describe('getAllItemIds', () => {
       namespace
     , itemId: itemId1
     , index: 0
-    , event: 'event-1'
+    , event: JSON.stringify('event-1')
     })
     setRawEvent({
       namespace
     , itemId: itemId2
     , index: 0
-    , event: 'event-2'
+    , event: JSON.stringify('event-2')
     })
 
     const result = await client.getAllItemIds(namespace)

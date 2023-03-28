@@ -29,8 +29,8 @@ export function setRawEvent(event: IRawItem): IRawItem {
 export function hasRawEvent(
   namespace: string
 , itemId: string
-
-, index: number): boolean {
+, index: number
+): boolean {
   return !!getRawEvent(namespace, itemId, index)
 }
 
