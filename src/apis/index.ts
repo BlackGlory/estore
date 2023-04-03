@@ -18,6 +18,6 @@ export const API: ImplementationOf<IAPI> = {
 , clearItemsByNamespace
 , removeItem
 , getItemSize
-, appendEvent
+, appendEvent: appendEvent as ImplementationOf<IAPI>['appendEvent']
 , getEvent
 }
