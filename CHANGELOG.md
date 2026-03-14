@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/BlackGlory/estore/compare/v0.4.0...v0.4.1) (2026-03-14)
+
+
+### Features
+
+* add `popEvent()` ([1fec062](https://github.com/BlackGlory/estore/commit/1fec0621b4b16cb68302c404adfae08cc602906d))
+
 ## [0.4.0](https://github.com/BlackGlory/estore/compare/v0.3.2...v0.4.0) (2023-03-28)
 
 
