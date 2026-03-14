@@ -1,5 +1,5 @@
 import { EventIndexConflict } from '@src/contract.js'
-import { getDatabase } from '../database.js'
+import { getDatabase } from '@src/database.js'
 import { isntUndefined } from 'extra-utils'
 import { withLazyStatic, lazyStatic } from 'extra-lazy'
 import { getNextEventIndex } from './get-next-event-index.js'

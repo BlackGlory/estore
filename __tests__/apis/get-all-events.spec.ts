@@ -45,7 +45,7 @@ describe('getAllEvents', () => {
 
       const result = await client.getAllEvents(namespace, 'id-1')
 
-      expect(result).toEqual(['event-1', 'event-2'])
+      expect(result).toStrictEqual(['event-1', 'event-2'])
     })
   })
 })

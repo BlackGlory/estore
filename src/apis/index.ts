@@ -1,6 +1,7 @@
 import { ImplementationOf } from 'delight-rpc'
 import { IAPI } from '@src/contract.js'
 import { appendEvent } from './append-event.js'
+import { popEvent } from './pop-event.js'
 import { clearItemsByNamespace } from './clear-items-by-namespace.js'
 import { removeItem } from './remove-item.js'
 import { getAllEvents } from './get-all-events.js'
@@ -19,5 +20,6 @@ export const API: ImplementationOf<IAPI> = {
 , removeItem
 , getItemSize
 , appendEvent: appendEvent as ImplementationOf<IAPI>['appendEvent']
+, popEvent: popEvent as ImplementationOf<IAPI>['popEvent']
 , getEvent
 }

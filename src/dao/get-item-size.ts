@@ -1,16 +1,9 @@
-import { getDatabase } from '../database.js'
-import { withLazyStatic, lazyStatic } from 'extra-lazy'
+import { getLastEventIndex } from './get-last-event-index.js'
+import { isNull } from '@blackglory/prelude'
 
-export const getItemSize = withLazyStatic((namespace: string, itemId: string): number => {
-  const row = lazyStatic(() => getDatabase().prepare(`
-    SELECT "index"
-      FROM estore_event
-     WHERE namespace = $namespace
-       AND item_id = $itemId
-     ORDER BY "index" DESC
-  `), [getDatabase()])
-    .get({ namespace, itemId }) as { index: number } | undefined
-  if (!row) return 0
-
-  return row['index'] + 1
-})
+export function getItemSize(namespace: string, itemId: string): number {
+  const lastEventIndex = getLastEventIndex(namespace, itemId)
+  return isNull(lastEventIndex)
+       ? 0
+       : lastEventIndex + 1
+}

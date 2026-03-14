@@ -6,73 +6,84 @@ import { getErrorAsync } from 'return-style'
 beforeEach(startService)
 afterEach(stopService)
 
-describe('appendEvent', () => {
-  describe('without next index', () => {
+describe('popEvent', () => {
+  describe('without last index', () => {
     test('item does not exist', async () => {
       const client = await buildClient()
       const namespace = 'test'
       const itemId = 'id'
-      const event = 'event'
 
-      await client.appendEvent(namespace, itemId, event)
+      await client.popEvent(namespace, itemId)
 
-      expect(getRawEvent(namespace, itemId, 0)).toEqual({
-        namespace
-      , item_id: itemId
-      , index: 0
-      , event: JSON.stringify(event)
-      })
+      expect(getRawEvent(namespace, itemId, 0)).toBeUndefined()
     })
 
     test('item exists', async () => {
       const client = await buildClient()
       const namespace = 'test'
       const itemId = 'id'
-      const event = 'event-2'
       setRawEvent({
         namespace
       , itemId
       , index: 0
       , event: JSON.stringify('event-1')
       })
-
-      await client.appendEvent(namespace, itemId, event)
-
-      expect(getRawEvent(namespace, itemId, 1)).toEqual({
+      setRawEvent({
         namespace
-      , item_id: itemId
+      , itemId
       , index: 1
-      , event: JSON.stringify(event)
+      , event: JSON.stringify('event-2')
       })
-    })
-  })
 
-  describe('with next index', () => {
-    test('legal index', async () => {
-      const client = await buildClient()
-      const namespace = 'test'
-      const itemId = 'id'
-      const event = 'event'
-
-      await client.appendEvent(namespace, itemId, event, 0)
+      await client.popEvent(namespace, itemId)
 
       expect(getRawEvent(namespace, itemId, 0)).toEqual({
         namespace
       , item_id: itemId
       , index: 0
-      , event: JSON.stringify(event)
+      , event: JSON.stringify('event-1')
       })
+      expect(getRawEvent(namespace, itemId, 1)).toBeUndefined()
+    })
+  })
+
+  describe('with last index', () => {
+    test('legal index', async () => {
+      const client = await buildClient()
+      const namespace = 'test'
+      const itemId = 'id'
+      setRawEvent({
+        namespace
+      , itemId
+      , index: 0
+      , event: JSON.stringify('event')
+      })
+
+      await client.popEvent(namespace, itemId, 0)
+
+      expect(getRawEvent(namespace, itemId, 0)).toBeUndefined()
     })
 
     test('illegal index', async () => {
       const client = await buildClient()
       const namespace = 'test'
       const itemId = 'id'
-      const event = 'event'
+      setRawEvent({
+        namespace
+      , itemId
+      , index: 0
+      , event: JSON.stringify('event')
+      })
 
-      const err = await getErrorAsync(() => client.appendEvent(namespace, itemId, event, 1))
+      const err = await getErrorAsync(() => client.popEvent(namespace, itemId, 1))
 
       expect(err).toBeInstanceOf(EventIndexConflict)
+      expect(getRawEvent(namespace, itemId, 0)).toEqual({
+        namespace
+      , item_id: itemId
+      , index: 0
+      , event: JSON.stringify('event')
+      })
     })
   })
 })

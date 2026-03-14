@@ -11,7 +11,7 @@ describe('getNamespaceStats', () => {
 
     const result = await client.getNamespaceStats(namespace)
 
-    expect(result).toEqual({ items: 0 })
+    expect(result).toStrictEqual({ items: 0 })
   })
 
   test('not empty', async () => {
@@ -39,6 +39,6 @@ describe('getNamespaceStats', () => {
 
     const result = await client.getNamespaceStats(namespace1)
 
-    expect(result).toEqual({ items: 2 })
+    expect(result).toStrictEqual({ items: 2 })
   })
 })

@@ -70,7 +70,7 @@ interface IAPI {
   getItemSize(namespace: string, itemId: string): number
 
   /**
-   * @param nextEventIndex 如果指定, 则会在eventIndex不等于下一个index时抛出EventIndexConflict错误.
+   * @param nextEventIndex 如果指定, 则会在不匹配下一个index时抛出EventIndexConflict错误.
    * @throws {EventIndexConflict}
    */
   appendEvent(
@@ -78,6 +78,16 @@ interface IAPI {
   , itemId: string
   , event: JSONValue
   , nextEventIndex?: number
+  ): null
+
+  /**
+   * @param lastEventIndex 如果指定, 则会在不匹配最后一个index时抛出EventIndexConflict错误.
+   * @throws {EventIndexConflict}
+   */
+  popEvent(
+    namespace: string
+  , itemId: string
+  , lastEventIndex?: number
   ): null
 
   getEvent(
